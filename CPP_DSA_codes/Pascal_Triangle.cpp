@@ -1,4 +1,6 @@
-#include<bits/stdc++.h>
+
+#include <vector>
+#include <iostream>
 
 //finding nth and nth col's element
 
