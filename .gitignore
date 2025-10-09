@@ -1,0 +1,16 @@
+# Ignore DT_Project folder
+DT_Project/
+
+# Ignore example and welcome files
+Example_codes.html
+Welcome.prompt.html
+
+# Ignore exercises and practice folders
+Exercise_1/
+Exercise_2/
+Exercise_3/
+Exercise_4/
+Exercise_5/
+Exercise_6/
+Practice/
+models/
