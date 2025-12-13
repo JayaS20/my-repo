@@ -43,35 +43,56 @@
             );
             //(a && b)if the value of a(left) is true then the result will be value of b(right). && - guard operator
         }
+
+        function ChatMessages(){
+            const array = React.useState([{
+                message: 'hello chatbot', 
+                sender: 'user', 
+                id: 'id1'},{
+                message: 'Hello how can I help you?', 
+                sender:'robot', 
+                id: 'id2'},{
+                message: 'can you get me today\'s date?',
+                sender: 'user', 
+                id:'id3'},{
+                message: 'Today is 13 December',
+                sender: 'robot', 
+                id: 'id4'}]);//converts the data into state(data that is connected to HTML. When we update the data, it will update the HTML)
+            const chatMessages = array[0]; //the data
+            const setChatMessages = array[1];//this updates the data
+
+            function sendMessages(){
+                setChatMessages([
+                    ...chatMessages, //... - spread operator - takes the values in an array and copies them into new array-this is the copy of the chatMessages
+                    {
+                        message: 'test',
+                        send: 'user',
+                        id: crypto.randomUUID()
+                    }
+                ])
+            }
+            return (
+                <>
+                    <button onClick={sendMessages}>Send Message </button>
+                {chatMessages.map((chatMessage)=>{
+                return (
+                    <ChatMessage 
+                    message = {chatMessage.message}
+                    sender = {chatMessage.sender}
+                    key={chatMessage.id}
+                    />
+                        );
+                    })}
+                </>
+            );
+    }
+        
      function App(){
     
-
-        const chatMessages = [{message: 'hello chatbot', sender: 'user',id: 'id1'},{message: 'Hello how can I help you?', sender:'robot', id: 'id2'},{message: 'can you get me today\'s date?',sender: 'user', id:'id3'},{message: 'Today is 13 December', sender: 'robot', id: 'id4'}]; //here each chat message is an object and we can convert this into component using map()
-        //unique key is very important for each object so hence we are manually giving id names(id1, id2,..)
-        // const chatMessageComponents = chatMessages.map((chatMessage)=>{
-        //     return (
-        //         <ChatMessage 
-        //         message = {chatMessage.message}
-        //         sender = {chatMessage.sender}
-        //         />
-        //     )
-        // });//.map lets us go thru each value of an array, runs the function and convert it into a new value (what we return is the new value)
-
-        //this is the shortcut way to write map inside JSX without nedding it to assign it to a variable and using it here(chatMessageComponents)
         return(
             <>
             <ChatInput />
-            {chatMessages.map((chatMessage)=>{
-            return (
-                <ChatMessage 
-                message = {chatMessage.message}
-                sender = {chatMessage.sender}
-                key={chatMessage.id}
-                />
-            )
-        })}
-  
-
+            <ChatMessages />
         </>
         );
     }
