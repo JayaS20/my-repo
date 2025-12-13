@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercise 1</title>
+    </head>
+    <body>
+        <div class="container"></div>
+        <script src = "https://unpkg.com/supersimpledev/dayjs.js"></script>
+        <script src="https://unpkg.com/supersimpledev/react.js"></script>
+        <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+        <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+        <script type="text/babel">
+            //1d
+            // const productCost=10 + 8 * 2;
+            // console.log(productCost);
+            // const containerjs=document.querySelector('.container');
+            // ReactDOM.createRoot(containerjs).render();
+            //1g
+            // console.log(dayjs().format('MMMM D'));
+            //1h
+            // const para = <p>Today is {dayjs().format('MMMM D')}</p>
+            
+            const containerjs=document.querySelector('.container');
+            // ReactDOM.createRoot(containerjs).render(para);
+            //1j
+            const para = <p>Current time {dayjs().format('HH:mm:ss')}</p>;
+            const root = ReactDOM.createRoot(containerjs);
+            root.render(para);
+            setInterval(()=>{
+                const para = <p>Current time {dayjs().format('HH:mm:ss')}</p>;
+                root.render(para);
+            },1000) //1000 ms = 1 s
+            
+        </script>
+    </body>
+</html>

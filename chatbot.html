@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src = "https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+        function ChatInput(){
+            return (
+                <>
+                    <input placeholder="Send a message to chatbot" size="30"/>
+                    <button>Send</button>
+                </>//this is called fragments<></> we can use this instead of so many div tags to group elements!
+            );
+        }
+        function ChatMessage({message, sender}){ //2️⃣
+        //function ChatMessage(props){ //props(properties) is an object that contains all the attributes to give it to the component
+            
+            //instead of this -- const message = props.message; we can do this which does the same exact job. This is called destructuring
+            //const {message, sender} = props; //shortcut! - you can also do one thing - instead of writing "props" as parameter we can write {message, sender} in the parameter 1️⃣
+            //const sender = props.sender;
+            // if(sender==='robot'){
+            //     return (
+            //          <div>
+            //             <img src="AI.png" width="50" />
+            //             {message}
+                        
+            //         </div>
+            //     );
+            // }
+            return (
+                <div>
+                    {sender==='robot' && <img src="AI.png" width="50" />}
+                    {message}
+                    {sender==='user' && <img src="user.jpeg" width="50"/>}
+                </div>
+            );
+            //(a && b)if the value of a(left) is true then the result will be value of b(right). && - guard operator
+        }
+     function App(){
+    
+
+        const chatMessages = [{message: 'hello chatbot', sender: 'user',id: 'id1'},{message: 'Hello how can I help you?', sender:'robot', id: 'id2'},{message: 'can you get me today\'s date?',sender: 'user', id:'id3'},{message: 'Today is 13 December', sender: 'robot', id: 'id4'}]; //here each chat message is an object and we can convert this into component using map()
+        //unique key is very important for each object so hence we are manually giving id names(id1, id2,..)
+        // const chatMessageComponents = chatMessages.map((chatMessage)=>{
+        //     return (
+        //         <ChatMessage 
+        //         message = {chatMessage.message}
+        //         sender = {chatMessage.sender}
+        //         />
+        //     )
+        // });//.map lets us go thru each value of an array, runs the function and convert it into a new value (what we return is the new value)
+
+        //this is the shortcut way to write map inside JSX without nedding it to assign it to a variable and using it here(chatMessageComponents)
+        return(
+            <>
+            <ChatInput />
+            {chatMessages.map((chatMessage)=>{
+            return (
+                <ChatMessage 
+                message = {chatMessage.message}
+                sender = {chatMessage.sender}
+                key={chatMessage.id}
+                />
+            )
+        })}
+  
+
+        </>
+        );
+    }
+
+    //  }        const app = ( //instead of using variable we'll use component to create this app
+    //     <>
+    //         <ChatInput />
+    //         <ChatMessage message="hello chatbot" sender="user"/>
+    //         <ChatMessage message="Hello! How can I help you?" sender="robot"/>
+    //         <ChatMessage message="can you get me today's date?" sender="user"/>
+    //         <ChatMessage message="Today is"sender="robot"/>
+  
+
+    //     </>);//we are putting {ChatInput()} here bcoz react can render it easily using this div tag
+        //the next one is component syntax - it does the exact same thing as the function declared
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html> 
